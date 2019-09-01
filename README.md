@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Your public key
+871068914492dad0b40381ddddf87016
+Your private key
+d0b89cae7c7661bfb4ac221e61e1ad794969780a
+
 ## Available Scripts
 
 In the project directory, you can run:
