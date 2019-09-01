@@ -1,15 +1,31 @@
 import React from "react";
+import { connect } from "react-redux";
+import { simpleAction } from "./actions/simpleAction";
 
-function App() {
+function App(props) {
+	const simpleAction = event => {
+		props.simpleAction();
+	};
+
 	return (
-		<div className="App">
-			<header className="App-header">
-				<p>
-					Hello World!
-				</p>
-			</header>
+		<div>
+			<button onClick={simpleAction}>Test redux action</button>
+			<pre>
+				{JSON.stringify(props)}
+			</pre>
 		</div>
 	);
 }
 
-export default App;
+const mapStateToProps = state => ({
+	...state
+});
+
+const mapDispatchToProps = dispatch => ({
+	simpleAction: () => dispatch(simpleAction())
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(App);
