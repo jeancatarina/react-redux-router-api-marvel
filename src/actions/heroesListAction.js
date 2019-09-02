@@ -1,3 +1,12 @@
+const getUrl = () => {
+	const apiKey = "871068914492dad0b40381ddddf87016",
+		endpoint = "characters",
+		baseUrl = `https://gateway.marvel.com:443/v1/public/${endpoint}`,
+		url = `${baseUrl}?apikey=${apiKey}`;
+
+	return url;
+};
+
 export const heroesLoading = loading => dispatch => {
 	dispatch({
 		type: "HEROES_LOADING",
@@ -13,15 +22,10 @@ export const setHeroes = heroes => dispatch => {
 };
 
 export const fetchData = () => {
-	const apiKey = "871068914492dad0b40381ddddf87016";
-	const endpoint = "characters";
-	const baseUrl = `https://gateway.marvel.com:443/v1/public/${endpoint}`;
-	const url = `${baseUrl}?apikey=${apiKey}`;
-
 	return dispatch => {
 		dispatch(heroesLoading(true));
 
-		fetch(url, {
+		fetch(getUrl(), {
 			accept: "application/json"
 		})
 			.then(response => {

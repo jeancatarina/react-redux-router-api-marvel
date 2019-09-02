@@ -1,48 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchData } from "../../actions/heroesListAction";
+import Card from "react-bootstrap/Card";
+import CardColumns from "react-bootstrap/CardColumns";
+import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
+
+const size = {
+	MEDIUM: "300px"
+};
 
 const createAvatar = thumbnail => (
-	<img
-		width="128"
-		height="128"
-		src={`${thumbnail.path}.${thumbnail.extension}`}
-	/>
+	<Card.Img variant="top" src={`${thumbnail.path}.${thumbnail.extension}`} />
 );
 
 const createHeroes = heroes => (
-	<div>
+	<CardColumns>
 		{heroes.map(hero => (
-			<div key={hero.id}>
+			<Card key={hero.id} style={{ width: size.MEDIUM }}>
 				{createAvatar(hero.thumbnail)}
-				{hero.name}
-			</div>
+				<Card.Body>
+					<Card.Title>{hero.name}</Card.Title>
+					<Card.Text>{hero.description}</Card.Text>
+					<Button variant="primary">Mais Detalhes</Button>
+				</Card.Body>
+			</Card>
 		))}
+	</CardColumns>
+);
+
+const createLoading = () => (
+	<div class="text-center">
+		<Spinner animation="border" role="status">
+			<span className="sr-only">Loading...</span>
+		</Spinner>
 	</div>
 );
 
 const getHeroes = heroes => heroes && createHeroes(heroes);
 
 function HeroesList(props) {
-	const {
-		heroesListReducer: { result: heroes }
-	} = props;
+	const { heroes, loading } = props;
 
-	const fetchData = () => {
-		props.fetchData();
-	};
+	useEffect(() => {
+		if (!heroes) {
+			props.fetchData();
+		}
+	}, [heroes]);
 
-	return (
-		<div>
-			<button onClick={fetchData}>Test redux action</button>
-			{getHeroes(heroes)}
-		</div>
-	);
+	return loading === false ? <>{getHeroes(heroes)}</> : createLoading();
 }
 
-const mapStateToProps = state => ({
-	...state
-});
+const mapStateToProps = state => {
+	return {
+		heroes: state.heroesListReducer.heroes,
+		loading: state.heroesListReducer.loading
+	};
+};
 
 const mapDispatchToProps = dispatch => ({
 	fetchData: () => dispatch(fetchData())
