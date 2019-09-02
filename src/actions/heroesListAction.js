@@ -1,8 +1,9 @@
-const getUrl = () => {
+const getUrl = (searchedName) => {
 	const apiKey = "871068914492dad0b40381ddddf87016",
 		endpoint = "characters",
 		baseUrl = `https://gateway.marvel.com:443/v1/public/${endpoint}`,
-		url = `${baseUrl}?apikey=${apiKey}`;
+		nameStartsWith = searchedName ? `&nameStartsWith=${searchedName}` : '',
+		url = `${baseUrl}?apikey=${apiKey}${nameStartsWith}`;
 
 	return url;
 };
@@ -21,11 +22,11 @@ export const setHeroes = heroes => dispatch => {
 	});
 };
 
-export const fetchData = () => {
+export const fetchData = (searchedName) => {
 	return dispatch => {
 		dispatch(heroesLoading(true));
 
-		fetch(getUrl(), {
+		fetch(getUrl(searchedName), {
 			accept: "application/json"
 		})
 			.then(response => {

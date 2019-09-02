@@ -30,7 +30,7 @@ const createHeroes = heroes => (
 );
 
 const createLoading = () => (
-	<div class="text-center">
+	<div className="text-center">
 		<Spinner animation="border" role="status">
 			<span className="sr-only">Loading...</span>
 		</Spinner>
