@@ -1,3 +1,5 @@
+![Alt text](https://github.com/jeancatarina/react-redux-router-api-marvel/blob/dev/git/app.PNG?raw=true)
+
 ## Available Scripts
 
 In the project directory, you can run:
