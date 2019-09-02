@@ -1,8 +1,8 @@
 export default (state = {}, action) => {
 	switch (action.type) {
-		case "SIMPLE_ACTION":
+		case "SET_HEROES":
 			return {
-				result: action.payload
+				result: action.heroes
 			};
 		default:
 			return state;
