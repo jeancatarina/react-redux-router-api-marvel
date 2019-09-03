@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import HeroesList from "./components/HeroesList/HeroesList";
+import HeroesList from "./containers/HeroesList";
 import HeroPage from "./components/HeroPage/HeroPage";
 
 const Routes = () => (
