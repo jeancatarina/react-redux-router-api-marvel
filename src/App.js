@@ -1,11 +1,11 @@
 import React from "react";
 import HeroesList from "./components/HeroesList/HeroesList";
-import SearchHeroes from "./components/SearchHeroes/SearchHeroes";
+import SearchNavbar from "./components/SearchNavbar/SearchNavbar";
 
 const App = props => {
 	return (
 		<div>
-			<SearchHeroes />
+			<SearchNavbar />
 			<HeroesList />
 		</div>
 	);

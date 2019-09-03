@@ -46,7 +46,7 @@ function HeroesList(props) {
 		if (!heroes) {
 			props.fetchData();
 		}
-	}, [heroes]);
+	}, []);
 
 	return loading === false ? <>{getHeroes(heroes)}</> : createLoading();
 }
