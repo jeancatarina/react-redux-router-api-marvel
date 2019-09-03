@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import { Nav, Navbar } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
-import { fetchData } from "../../actions/heroesListAction";
 import { connect } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
+import { fetchData } from "../../actions/heroesListAction";
 
 const key = {
 	ENTER: 13,
@@ -46,13 +46,13 @@ const createSearch = (props, searchInputRef) => (
 
 const createPageButtons = () => (
 	<Nav className="mr-auto">
-		<Nav.Link href="#home">Home</Nav.Link>
+		<LinkContainer to="/">
+			<Nav.Link>Home</Nav.Link>
+		</LinkContainer>
 	</Nav>
 );
 
-const createHomeLogo = () => (
-	<Navbar.Brand href="#home">Marvel Heroes</Navbar.Brand>
-);
+const createHomeLogo = () => <Navbar.Brand>Marvel Heroes</Navbar.Brand>;
 
 const SearchNavbar = props => {
 	const searchInputRef = useRef(null);
