@@ -1,12 +1,13 @@
 import React from "react";
 import HeroesList from "./components/HeroesList/HeroesList";
-import SearchHeroes from "./components/SearchHeroes/SearchHeroes";
+import SearchNavbar from "./components/SearchNavbar/SearchNavbar";
+import Routes from "./Routes";
 
 const App = props => {
 	return (
 		<div>
-			<SearchHeroes />
-			<HeroesList />
+			<SearchNavbar />
+			<Routes />
 		</div>
 	);
 };

@@ -5,25 +5,34 @@ import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import { LinkContainer } from "react-router-bootstrap";
 
 const size = {
 	MEDIUM: "300px"
 };
 
-const createAvatar = thumbnail => (
+const createCardAvatar = thumbnail => (
 	<Card.Img variant="top" src={`${thumbnail.path}.${thumbnail.extension}`} />
+);
+
+const createCardBody = hero => (
+	<Card.Body>
+		<Card.Title>{hero.name}</Card.Title>
+		<Card.Text>{hero.description}</Card.Text>
+		<LinkContainer to={`/hero/${hero.id}`}>
+			<Button variant="primary">
+				Mais Detalhes
+			</Button>
+		</LinkContainer>
+	</Card.Body>
 );
 
 const createHeroes = heroes => (
 	<CardColumns>
 		{heroes.map(hero => (
 			<Card key={hero.id} style={{ width: size.MEDIUM }}>
-				{createAvatar(hero.thumbnail)}
-				<Card.Body>
-					<Card.Title>{hero.name}</Card.Title>
-					<Card.Text>{hero.description}</Card.Text>
-					<Button variant="primary">Mais Detalhes</Button>
-				</Card.Body>
+				{createCardAvatar(hero.thumbnail)}
+				{createCardBody(hero)}
 			</Card>
 		))}
 	</CardColumns>
@@ -46,7 +55,7 @@ function HeroesList(props) {
 		if (!heroes) {
 			props.fetchData();
 		}
-	}, [heroes]);
+	}, []);
 
 	return loading === false ? <>{getHeroes(heroes)}</> : createLoading();
 }

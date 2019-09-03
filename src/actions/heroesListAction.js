@@ -1,28 +1,28 @@
-const getUrl = (searchedName) => {
+const getUrl = searchedName => {
 	const apiKey = "871068914492dad0b40381ddddf87016",
 		endpoint = "characters",
 		baseUrl = `https://gateway.marvel.com:443/v1/public/${endpoint}`,
-		nameStartsWith = searchedName ? `&nameStartsWith=${searchedName}` : '',
+		nameStartsWith = searchedName ? `&nameStartsWith=${searchedName}` : "",
 		url = `${baseUrl}?apikey=${apiKey}${nameStartsWith}`;
 
 	return url;
 };
 
-export const heroesLoading = loading => dispatch => {
-	dispatch({
+export const heroesLoading = loading => {
+	return {
 		type: "HEROES_LOADING",
 		loading: loading
-	});
+	};
 };
 
-export const setHeroes = heroes => dispatch => {
-	dispatch({
+export const setHeroes = heroes => {
+	return {
 		type: "SET_HEROES",
 		heroes: heroes
-	});
+	};
 };
 
-export const fetchData = (searchedName) => {
+export const fetchData = searchedName => {
 	return dispatch => {
 		dispatch(heroesLoading(true));
 
@@ -39,6 +39,8 @@ export const fetchData = (searchedName) => {
 			.then(({ data: { results: heroes } }) => {
 				dispatch(setHeroes(heroes));
 				dispatch(heroesLoading(false));
+
+				return Promise.resolve();
 			});
 	};
 };
