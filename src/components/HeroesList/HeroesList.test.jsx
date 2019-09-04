@@ -2,6 +2,7 @@ import { mount } from "enzyme";
 import React from "react";
 import HeroesList from "./HeroesList";
 import { MemoryRouter } from "react-router";
+import { expect } from 'chai';
 
 const heroesMock = [
 	{
@@ -52,7 +53,6 @@ describe("HeroesList tests", () => {
 		});
 
 		it("should render HeroesList", () => {
-			debugger;
 			expect(wrapper.find(HeroesList)).to.have.length(1);
 		});
 	});
