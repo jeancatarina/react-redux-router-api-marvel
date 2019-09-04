@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchData } from "../../actions/heroesListAction";
+import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
-import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -67,21 +65,7 @@ function HeroesList(props) {
 		}
 	}, []);
 
-	return loading === false ? <>{getHeroes(heroes)}</> : createLoading();
+	return loading === false ? getHeroes(heroes) : createLoading();
 }
 
-const mapStateToProps = state => {
-	return {
-		heroes: state.heroesListReducer.heroes,
-		loading: state.heroesListReducer.loading
-	};
-};
-
-const mapDispatchToProps = dispatch => ({
-	fetchData: () => dispatch(fetchData())
-});
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(HeroesList);
+export default HeroesList;

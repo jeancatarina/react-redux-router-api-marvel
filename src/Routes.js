@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import HeroesList from "./components/HeroesList/HeroesList";
-import HeroPage from "./components/HeroPage/HeroPage";
+import HeroesList from "./containers/HeroesList";
+import HeroPage from "./containers/HeroPage";
 
 const Routes = () => (
 	<Switch>

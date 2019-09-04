@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
 import { Redirect } from "react-router-dom";
@@ -58,10 +57,4 @@ const HeroPage = props => {
 	return hero ? createCard(hero) : emptyState();
 };
 
-const mapStateToProps = state => {
-	return {
-		heroes: state.heroesListReducer.heroes
-	};
-};
-
-export default connect(mapStateToProps)(HeroPage);
+export default HeroPage;
