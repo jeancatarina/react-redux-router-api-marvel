@@ -1,3 +1,5 @@
+import HeroListConstants from "../helpers/HeroListConstants";
+
 const getUrl = searchedName => {
 	const apiKey = "871068914492dad0b40381ddddf87016",
 		endpoint = "characters",
@@ -10,14 +12,14 @@ const getUrl = searchedName => {
 
 export const heroesLoading = loading => {
 	return {
-		type: "HEROES_LOADING",
+		type: HeroListConstants.HEROES_LOADING,
 		loading: loading
 	};
 };
 
 export const setHeroes = heroes => {
 	return {
-		type: "SET_HEROES",
+		type: HeroListConstants.SET_HEROES,
 		heroes: heroes
 	};
 };
