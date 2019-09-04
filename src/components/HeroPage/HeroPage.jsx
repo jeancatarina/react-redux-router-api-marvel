@@ -2,10 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
+import { Redirect } from "react-router-dom";
 
 const size = {
 	MEDIUM: "300px",
-	BIG: "500px"
+	BIG: "100%"
 };
 
 const createCardAvatar = thumbnail => (
@@ -20,27 +21,30 @@ const createCardBody = card => (
 );
 
 const createTvShows = (serie, key) => (
-	<Card key={`tvShows${key}`} style={{ width: size.MEDIUM }}>
-		{createCardBody(serie)}
+	<div key={`tvShows${key}`}>{createCardBody(serie)}</div>
+);
+
+const createHero = hero => (
+	<Card key={hero.id} style={{ width: size.BIG }}>
+		{createCardAvatar(hero.thumbnail)}
+		{createCardBody(hero)}
 	</Card>
 );
 
-const createHeroes = hero => (
+const createCard = hero => (
 	<CardColumns>
-		<Card key={hero.id} style={{ width: size.BIG }}>
-			{createCardAvatar(hero.thumbnail)}
-			{createCardBody(hero)}
-		</Card>
+		{createHero(hero)}
 		<h1>{`As 20 primeiras séries do ${hero.name}`}</h1>
 		{hero.series.items.map((serie, key) => createTvShows(serie, key))}
 	</CardColumns>
 );
 
 const emptyState = () => (
-	<>
-		Ops... Herói não encontrado. Você pode pesquisar por ele ou desapegar e
-		ir na home.
-	</>
+	<Redirect
+		to={{
+			pathname: "/"
+		}}
+	/>
 );
 
 const getCurrentHero = (heroes, heroId) =>
@@ -51,7 +55,7 @@ const HeroPage = props => {
 	const heroId = props.match.params.id;
 	const hero = getCurrentHero(heroes, heroId);
 
-	return hero ? createHeroes(hero) : emptyState();
+	return hero ? createCard(hero) : emptyState();
 };
 
 const mapStateToProps = state => {

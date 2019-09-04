@@ -11,6 +11,10 @@ const size = {
 	MEDIUM: "300px"
 };
 
+const cardStyle = {
+	width: size.MEDIUM
+};
+
 const createCardAvatar = thumbnail => (
 	<Card.Img variant="top" src={`${thumbnail.path}.${thumbnail.extension}`} />
 );
@@ -18,11 +22,9 @@ const createCardAvatar = thumbnail => (
 const createCardBody = hero => (
 	<Card.Body>
 		<Card.Title>{hero.name}</Card.Title>
-		<Card.Text>{hero.description}</Card.Text>
+		<Card.Text>{`${hero.description.substr(0, 100)}`}</Card.Text>
 		<LinkContainer to={`/hero/${hero.id}`}>
-			<Button variant="primary">
-				Mais Detalhes
-			</Button>
+			<Button variant="primary">Mais Detalhes</Button>
 		</LinkContainer>
 	</Card.Body>
 );
@@ -30,7 +32,7 @@ const createCardBody = hero => (
 const createHeroes = heroes => (
 	<CardColumns>
 		{heroes.map(hero => (
-			<Card key={hero.id} style={{ width: size.MEDIUM }}>
+			<Card key={hero.id} style={cardStyle}>
 				{createCardAvatar(hero.thumbnail)}
 				{createCardBody(hero)}
 			</Card>
@@ -46,7 +48,15 @@ const createLoading = () => (
 	</div>
 );
 
-const getHeroes = heroes => heroes && createHeroes(heroes);
+const emptyState = () => (
+	<div>
+		{`Como assim eu não achei nada? Certamente você deve estar pesquisando
+		heróis da DC. Tente pesquisar o menino aranha`}
+	</div>
+);
+
+const getHeroes = heroes =>
+	heroes && heroes.length ? createHeroes(heroes) : emptyState();
 
 function HeroesList(props) {
 	const { heroes, loading } = props;
