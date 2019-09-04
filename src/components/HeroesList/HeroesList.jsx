@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
+import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
-import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -18,9 +18,7 @@ const createCardBody = hero => (
 		<Card.Title>{hero.name}</Card.Title>
 		<Card.Text>{hero.description}</Card.Text>
 		<LinkContainer to={`/hero/${hero.id}`}>
-			<Button variant="primary">
-				Mais Detalhes
-			</Button>
+			<Button variant="primary">Mais Detalhes</Button>
 		</LinkContainer>
 	</Card.Body>
 );
@@ -55,7 +53,7 @@ function HeroesList(props) {
 		}
 	}, []);
 
-	return loading === false ? <>{getHeroes(heroes)}</> : createLoading();
+	return loading === false ? getHeroes(heroes) : createLoading();
 }
 
 export default HeroesList;

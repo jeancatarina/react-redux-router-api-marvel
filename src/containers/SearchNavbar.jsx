@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as HeroesListActions from "../actions/HeroesListActions";
-import HeroesListPresentational from "../components/HeroesList/HeroesList";
+import SearchNavbarPresentational from "../components/SearchNavbar/SearchNavbar";
 
 const mapStateToProps = state => {
 	return {
@@ -11,14 +11,15 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-	fetchData: () => dispatch(HeroesListActions.fetchData())
+	fetchData: searchedName =>
+		dispatch(HeroesListActions.fetchData(searchedName))
 });
 
-const HeroesListConnect = connect(
+const SearchNavbarConnect = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(HeroesListPresentational);
+)(SearchNavbarPresentational);
 
-const HeroesList = props => <HeroesListConnect {...props} />;
+const SearchNavbar = props => <SearchNavbarConnect {...props} />;
 
-export default HeroesList;
+export default SearchNavbar;

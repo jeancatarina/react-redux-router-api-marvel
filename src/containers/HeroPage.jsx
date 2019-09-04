@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as HeroesListActions from "../actions/HeroesListActions";
-import HeroesListPresentational from "../components/HeroesList/HeroesList";
+import HeroPagePresentational from "../components/HeroPage/HeroPage";
 
 const mapStateToProps = state => {
 	return {
@@ -14,11 +14,11 @@ const mapDispatchToProps = dispatch => ({
 	fetchData: () => dispatch(HeroesListActions.fetchData())
 });
 
-const HeroesListConnect = connect(
+const HeroPageConnect = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(HeroesListPresentational);
+)(HeroPagePresentational);
 
-const HeroesList = props => <HeroesListConnect {...props} />;
+const HeroPage = props => <HeroPageConnect {...props} />;
 
-export default HeroesList;
+export default HeroPage;
