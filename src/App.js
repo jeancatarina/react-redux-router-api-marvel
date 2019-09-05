@@ -1,9 +1,8 @@
 import React from "react";
-import HeroesList from "./components/HeroesList/HeroesList";
-import SearchNavbar from "./components/SearchNavbar/SearchNavbar";
+import SearchNavbar from "./containers/SearchNavbar";
 import Routes from "./Routes";
 
-const App = props => {
+const App = () => {
 	return (
 		<div>
 			<SearchNavbar />

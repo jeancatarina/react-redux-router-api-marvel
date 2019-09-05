@@ -3,9 +3,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { fetchData } from "../../actions/heroesListAction";
 
 const key = {
 	ENTER: 13,
@@ -66,18 +64,4 @@ const SearchNavbar = props => {
 	);
 };
 
-const mapStateToProps = state => {
-	return {
-		heroes: state.heroesListReducer.heroes,
-		loading: state.heroesListReducer.loading
-	};
-};
-
-const mapDispatchToProps = dispatch => ({
-	fetchData: searchedName => dispatch(fetchData(searchedName))
-});
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(SearchNavbar);
+export default React.memo(SearchNavbar);
