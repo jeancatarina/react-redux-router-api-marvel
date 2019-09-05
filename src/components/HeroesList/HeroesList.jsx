@@ -12,51 +12,56 @@ const size = {
 const cardStyle = {
 	width: size.MEDIUM
 };
+const HeroesList = props => {
+	const createCardAvatar = thumbnail => (
+		<Card.Img
+			variant="top"
+			src={`${thumbnail.path}.${thumbnail.extension}`}
+		/>
+	);
 
-const createCardAvatar = thumbnail => (
-	<Card.Img variant="top" src={`${thumbnail.path}.${thumbnail.extension}`} />
-);
+	const createCardBody = hero => (
+		<Card.Body>
+			<Card.Title>{hero.name}</Card.Title>
+			<Card.Text>{`${hero.description.substr(0, 100)}`}</Card.Text>
+			<LinkContainer
+				onClick={props.enzymeTestRoute}
+				to={`/hero/${hero.id}`}
+			>
+				<Button variant="primary">Mais Detalhes</Button>
+			</LinkContainer>
+		</Card.Body>
+	);
 
-const createCardBody = hero => (
-	<Card.Body>
-		<Card.Title>{hero.name}</Card.Title>
-		<Card.Text>{`${hero.description.substr(0, 100)}`}</Card.Text>
-		<LinkContainer to={`/hero/${hero.id}`}>
-			<Button variant="primary">Mais Detalhes</Button>
-		</LinkContainer>
-	</Card.Body>
-);
+	const createHeroes = heroes => (
+		<CardColumns>
+			{heroes.map(hero => (
+				<Card key={hero.id} style={cardStyle}>
+					{createCardAvatar(hero.thumbnail)}
+					{createCardBody(hero)}
+				</Card>
+			))}
+		</CardColumns>
+	);
 
-const createHeroes = heroes => (
-	<CardColumns>
-		{heroes.map(hero => (
-			<Card key={hero.id} style={cardStyle}>
-				{createCardAvatar(hero.thumbnail)}
-				{createCardBody(hero)}
-			</Card>
-		))}
-	</CardColumns>
-);
+	const createLoading = () => (
+		<div className="text-center">
+			<Spinner animation="border" role="status">
+				<span className="sr-only">Loading...</span>
+			</Spinner>
+		</div>
+	);
 
-const createLoading = () => (
-	<div className="text-center">
-		<Spinner animation="border" role="status">
-			<span className="sr-only">Loading...</span>
-		</Spinner>
-	</div>
-);
-
-const emptyState = () => (
-	<div>
-		{`Como assim eu não achei nada? Certamente você deve estar pesquisando
+	const emptyState = () => (
+		<div>
+			{`Como assim eu não achei nada? Certamente você deve estar pesquisando
 		heróis da DC. Tente pesquisar o menino aranha`}
-	</div>
-);
+		</div>
+	);
 
-const getHeroes = heroes =>
-	heroes && heroes.length ? createHeroes(heroes) : emptyState();
+	const getHeroes = heroes =>
+		heroes && heroes.length ? createHeroes(heroes) : emptyState();
 
-function HeroesList(props) {
 	const { heroes, loading } = props;
 
 	useEffect(() => {
@@ -66,6 +71,6 @@ function HeroesList(props) {
 	}, []);
 
 	return loading === false ? getHeroes(heroes) : createLoading();
-}
+};
 
-export default HeroesList;
+export default React.memo(HeroesList);

@@ -57,4 +57,4 @@ const HeroPage = props => {
 	return hero ? createCard(hero) : emptyState();
 };
 
-export default HeroPage;
+export default React.memo(HeroPage);

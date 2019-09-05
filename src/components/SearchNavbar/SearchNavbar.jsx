@@ -64,4 +64,4 @@ const SearchNavbar = props => {
 	);
 };
 
-export default SearchNavbar;
+export default React.memo(SearchNavbar);
