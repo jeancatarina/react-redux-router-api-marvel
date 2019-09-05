@@ -56,25 +56,20 @@ describe("HeroesList tests", () => {
 			unmountWrapper();
 		});
 
-		it("should render HeroesList", () => {
+		const shouldRenderComponent = componentName => {
+			it(`should render ${componentName}`, () => {
+				expect(wrapper.find(componentName)).to.have.length(1);
+			});
+		};
+
+		it(`should render HeroesList`, () => {
 			expect(wrapper.find(HeroesList)).to.have.length(1);
 		});
 
-		it("should render CardImg", () => {
-			expect(wrapper.find("CardImg")).to.have.length(1);
-		});
-
-		it("should render CardTitle", () => {
-			expect(wrapper.find("CardTitle")).to.have.length(1);
-		});
-
-		it("should render CardText", () => {
-			expect(wrapper.find("CardText")).to.have.length(1);
-		});
-
-		it("should render Button", () => {
-			expect(wrapper.find("Button")).to.have.length(1);
-		});
+		shouldRenderComponent("CardImg");
+		shouldRenderComponent("CardTitle");
+		shouldRenderComponent("CardText");
+		shouldRenderComponent("Button");
 	});
 
 	describe("data matching", () => {
@@ -86,7 +81,7 @@ describe("HeroesList tests", () => {
 			unmountWrapper();
 		});
 
-		const matchTextWithMock = (componentName, mockProp) => {
+		const shouldMatchTextWithMock = (componentName, mockProp) => {
 			it(`should ${componentName} match with heroesMock`, () => {
 				expect(wrapper.find(componentName).text()).to.be.equal(
 					heroesMock[0][mockProp]
@@ -94,9 +89,9 @@ describe("HeroesList tests", () => {
 			});
 		};
 
-		matchTextWithMock("CardTitle", "name");
+		shouldMatchTextWithMock("CardTitle", "name");
 
-		matchTextWithMock("CardText", "description");
+		shouldMatchTextWithMock("CardText", "description");
 
 		it("should Button match with heroesMock", () => {
 			expect(wrapper.find("Button").text()).to.be.equal("Mais Detalhes");
@@ -114,7 +109,7 @@ describe("HeroesList tests", () => {
 			unmountWrapper();
 		});
 
-		it("should do something when something happens", () => {
+		it("should call route spy with args", () => {
 			const btn = wrapper.find("Button");
 
 			btn.simulate("click");

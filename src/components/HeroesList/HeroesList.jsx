@@ -13,6 +13,14 @@ const cardStyle = {
 	width: size.MEDIUM
 };
 const HeroesList = props => {
+	const { heroes, loading } = props;
+
+	useEffect(() => {
+		if (!heroes) {
+			props.fetchData();
+		}
+	}, []);
+	
 	const createCardAvatar = thumbnail => (
 		<Card.Img
 			variant="top"
@@ -61,14 +69,6 @@ const HeroesList = props => {
 
 	const getHeroes = heroes =>
 		heroes && heroes.length ? createHeroes(heroes) : emptyState();
-
-	const { heroes, loading } = props;
-
-	useEffect(() => {
-		if (!heroes) {
-			props.fetchData();
-		}
-	}, []);
 
 	return loading === false ? getHeroes(heroes) : createLoading();
 };

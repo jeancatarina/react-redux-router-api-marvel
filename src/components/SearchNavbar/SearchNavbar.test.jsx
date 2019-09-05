@@ -1,8 +1,9 @@
+import { expect } from "chai";
 import { mount } from "enzyme";
 import React from "react";
-import SearchNavbar from "./SearchNavbar";
 import { MemoryRouter } from "react-router";
-import { expect } from 'chai';
+import sinon from "sinon";
+import SearchNavbar from "./SearchNavbar";
 
 const heroesMock = [
 	{
@@ -21,7 +22,9 @@ const heroesMock = [
 ];
 
 describe("SearchNavbar tests", () => {
-	let wrapper, instance;
+	let wrapper,
+		instance,
+		spy = { fetchData: sinon.spy() };
 
 	const mountWrapper = extraProps =>
 		mount(
@@ -29,6 +32,7 @@ describe("SearchNavbar tests", () => {
 				<SearchNavbar
 					loading={false}
 					heroes={heroesMock}
+					fetchData={spy.fetchData}
 					{...extraProps}
 				/>
 			</MemoryRouter>
@@ -52,9 +56,38 @@ describe("SearchNavbar tests", () => {
 			unmountWrapper();
 		});
 
+		const shouldRenderComponent = componentName => {
+			it(`should render ${componentName}`, () => {
+				expect(wrapper.find(componentName)).to.have.length(1);
+			});
+		};
+
 		it("should render SearchNavbar", () => {
 			expect(wrapper.find(SearchNavbar)).to.have.length(1);
 		});
+
+		shouldRenderComponent("NavbarBrand");
+		shouldRenderComponent("NavLink");
+		shouldRenderComponent("FormControl");
+	});
+
+	describe("data matching", () => {
+		beforeAll(() => {
+			initialize();
+		});
+
+		afterAll(() => {
+			unmountWrapper();
+		});
+
+		const shouldMatchTextWithMock = (componentName, text) => {
+			it(`should ${componentName} match with text`, () => {
+				expect(wrapper.find(componentName).text()).to.be.equal(text);
+			});
+		};
+
+		shouldMatchTextWithMock("NavbarBrand", "Marvel Heroes");
+		shouldMatchTextWithMock("NavLink", "Home");
 	});
 
 	describe("behavior tests", () => {
@@ -66,8 +99,18 @@ describe("SearchNavbar tests", () => {
 			unmountWrapper();
 		});
 
-		it("should do something when something happens", () => {
-			//
+		it("should call fetchData", () => {
+			const input = wrapper.find("input"),
+				btn = wrapper.find("Button");
+
+			input.simulate("change", {
+				target: {
+					value: "iron man"
+				}
+			});
+			btn.simulate("click");
+			wrapper.update();
+			expect(spy.fetchData.called).to.be.true;
 		});
 	});
 });
