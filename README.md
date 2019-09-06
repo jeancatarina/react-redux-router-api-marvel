@@ -1,10 +1,5 @@
 ![Alt text](https://github.com/jeancatarina/react-redux-router-api-marvel/blob/dev/git/app.PNG?raw=true)
 
-Your public key
-871068914492dad0b40381ddddf87016
-Your private key
-d0b89cae7c7661bfb4ac221e61e1ad794969780a
-
 ## Available Scripts
 
 In the project directory, you can run:
