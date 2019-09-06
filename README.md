@@ -1,4 +1,4 @@
-![Alt text](https://github.com/jeancatarina/react-redux-router-api-marvel/blob/dev/git/app.PNG?raw=true)
+![Alt text](https://github.com/jeancatarina/react-redux-router-api-marvel/blob/dev/git/marvel.gif?raw=true)
 
 Your public key
 871068914492dad0b40381ddddf87016
