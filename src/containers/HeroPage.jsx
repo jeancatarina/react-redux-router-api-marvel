@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
 	fetchData: () => dispatch(HeroesListActions.fetchData()),
-	setHeroes: () => dispatch(HeroesListActions.setHeroes())
+	setHeroes: (heroes) => dispatch(HeroesListActions.setHeroes(heroes))
 });
 
 const HeroPageConnect = connect(

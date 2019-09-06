@@ -5,9 +5,7 @@ import {
 	CardColumns,
 	FormControl,
 	InputGroup,
-	Toast,
-	Row,
-	Col
+	Toast
 } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import getHeroesObjWithCustomNames from "../../helpers/LocalStorageManager";
