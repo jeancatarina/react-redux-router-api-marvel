@@ -11,7 +11,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-	fetchData: () => dispatch(HeroesListActions.fetchData())
+	fetchData: () => dispatch(HeroesListActions.fetchData()),
+	setHeroes: () => dispatch(HeroesListActions.setHeroes())
 });
 
 const HeroPageConnect = connect(

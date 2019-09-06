@@ -10,6 +10,7 @@ import {
 	Col
 } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import getHeroesObjWithCustomNames from "../../helpers/LocalStorageManager";
 
 const size = {
 	MEDIUM: "300px",
@@ -32,7 +33,7 @@ const HeroPage = props => {
 		hero = getCurrentHero(heroes, heroId),
 		cardTitleInputRef = useRef(null),
 		customHeroName = localStorage.getItem(heroId),
-		[show, setShow] = useState(false);
+		[show, setShowAlert] = useState(false);
 
 	const createCardAvatar = thumbnail => (
 		<Card.Img
@@ -44,7 +45,8 @@ const HeroPage = props => {
 	const changeHeroName = event => {
 		if (event.charCode === key.ENTER || event.charCode === key.MOUSE) {
 			localStorage.setItem(heroId, cardTitleInputRef.current.value);
-			setShow(true);
+			props.setHeroes(getHeroesObjWithCustomNames(heroes));
+			setShowAlert(true);
 		}
 	};
 
@@ -107,7 +109,12 @@ const HeroPage = props => {
 	);
 
 	const createToaster = () => (
-		<Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+		<Toast
+			onClose={() => setShowAlert(false)}
+			show={show}
+			delay={3000}
+			autohide
+		>
 			<div
 				className="alert alert-success"
 				style={toasterStyle}
