@@ -12,6 +12,7 @@ const size = {
 const cardStyle = {
 	width: size.MEDIUM
 };
+
 const HeroesList = props => {
 	const { heroes, loading } = props;
 
@@ -20,7 +21,7 @@ const HeroesList = props => {
 			props.fetchData();
 		}
 	}, []);
-	
+
 	const createCardAvatar = thumbnail => (
 		<Card.Img
 			variant="top"

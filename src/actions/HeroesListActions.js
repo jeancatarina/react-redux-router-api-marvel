@@ -1,4 +1,5 @@
 import HeroListConstants from "../helpers/HeroListConstants";
+import getHeroesObjWithCustomNames from "../helpers/LocalStorageManager";
 
 const getUrl = searchedName => {
 	const apiKey = "871068914492dad0b40381ddddf87016",
@@ -39,7 +40,7 @@ export const fetchData = searchedName => {
 				return response.json();
 			})
 			.then(({ data: { results: heroes } }) => {
-				dispatch(setHeroes(heroes));
+				dispatch(setHeroes(getHeroesObjWithCustomNames(heroes)));
 				dispatch(heroesLoading(false));
 
 				return Promise.resolve();
