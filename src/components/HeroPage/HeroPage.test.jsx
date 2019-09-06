@@ -57,18 +57,4 @@ describe("HeroPage tests", () => {
 			expect(wrapper.find(HeroPage)).to.have.length(1);
 		});
 	});
-
-	describe("behavior tests", () => {
-		beforeAll(() => {
-			initialize();
-		});
-
-		afterAll(() => {
-			unmountWrapper();
-		});
-
-		it("should do something when something happens", () => {
-			//
-		});
-	});
 });
